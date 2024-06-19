@@ -1,47 +1,69 @@
-"use client";
+"use client"
 import Image from "next/image";
 import HeroImage from "../public/images/austin-distel-wD1LRb9OeEo-unsplash.jpg";
-import React, { useEffect } from "react";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import React, { useEffect, useRef } from "react";
 
+// Define the stats
 const stats = [
   { label: "Number of successful Candidate", value: 231 },
   { label: "verified testimonials", value: 103 },
   { label: "Clients worked with", value: 84 },
 ];
 
-const Counter = ({ value }) => {
-  const controls = useAnimation();
-  const { ref, inView } = useInView({ triggerOnce: true });
+// Custom hook for counting up
+const useCountUp = (endValue) => {
+  const ref = useRef();
 
   useEffect(() => {
-    if (inView) {
-      controls.start({ count: value, transition: { duration: 2 } });
-    }
-  }, [controls, inView, value]);
+    let start = 0;
+    const duration = 2000; // 2 seconds
+    const incrementTime = Math.abs(Math.floor(duration / endValue));
+    const timer = setInterval(() => {
+      start += 1;
+      ref.current.innerText = start;
+      if (start === endValue) clearInterval(timer);
+    }, incrementTime);
+  }, [endValue]);
 
+  return ref;
+};
+
+// StatsSection Component
+const StatsSection = () => {
   return (
-    <motion.span ref={ref} initial={{ count: 0 }} animate={controls}>
-      {({ count }) => Math.floor(count)}
-    </motion.span>
+    <div className="bg-gradient-to-r from-indigo-200 to-indigo-100 py-8 border-t border-b-black">
+      <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between items-center px-4 md:px-8">
+        {stats.map((stat, index) => (
+          <div key={index} className="text-center mb-8 md:mb-0">
+            <div className="flex items-baseline justify-center">
+              <span className="text-xl md:text-2xl font-bold text-black dark:text-white mr-2" ref={useCountUp(stat.value)}>
+                0
+              </span>
+              <span className="text-xl md:text-2xl font-bold text-black dark:text-white">↑</span>
+            </div>
+            <p className="text-gray-700 dark:text-gray-300 mt-2">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
+// Hero Component
 const Hero = () => {
   return (
-    <section className="py-20 mt-14 bg-white dark:bg-gray-900">
+    <section className="py-20 mt-14 bg-white dark:bg-gray-900" id="hero">
       <div className="max-w-screen-xl mx-auto text-gray-600 dark:text-gray-300 gap-x-12 flex flex-col md:flex-row items-center justify-between px-4 md:px-8">
         <div className="flex-none space-y-5 lg:max-w-xl">
-          <h1 className="text-sm text-indigo-600 dark:text-indigo-400 font-medium text-[22px]">
+          <h1 className="text-sm text-indigo-600 dark:text-indigo-400 font-medium text-[22px] xl:text-[20px]">
             We Are #1 On The Market.
           </h1>
-          <h2 className="text-4xl text-gray-800 dark:text-gray-100 font-extrabold md:text-5xl lg:text-6xl">
+          <h2 className="xl:text-[64px] text-4xl text-gray-800 dark:text-gray-100 font-extrabold md:text-5xl lg:text-6xl">
             Bridging Talents{" "}
             <span className="text-indigo-600 dark:text-indigo-400">&</span>{" "}
             Building Futures.
           </h2>
-          <p className="lg:text-[18px]">
+          <p className="lg:text-[18px] xl:text-[18px]">
             At Zyntel Recruitment, we bridge the gap between exceptional talent
             and leading organizations, ensuring a perfect match every time.
           </p>
@@ -72,30 +94,12 @@ const Hero = () => {
             </a>
           </div>
         </div>
-        <div className="flex-none mt-14 md:mt-0 md:max-w-xl">
+        <div className="flex-none mt-14 md:mt-0 md:max-w-xl xl:max-w-2xl">
           <Image src={HeroImage} className="md:rounded-tl-[108px]" alt="Hero" />
         </div>
       </div>
       <div className="mt-16">
-        <div className="bg-gradient-to-r from-indigo-200 to-indigo-100 py-8">
-          <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between items-center px-4 md:px-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center mb-8 md:mb-0">
-                <div className="flex items-baseline justify-center">
-                  <span className="text-xl md:text-2xl font-bold text-black dark:text-white mr-2">
-                    <Counter value={stat.value} />
-                  </span>
-                  <span className="text-xl md:text-2xl font-bold text-black dark:text-white">
-                    ↑
-                  </span>
-                </div>
-                <p className="text-gray-700 dark:text-gray-300 mt-2">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
+        <StatsSection />
       </div>
     </section>
   );
