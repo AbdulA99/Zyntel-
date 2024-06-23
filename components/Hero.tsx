@@ -1,13 +1,18 @@
 "use client"
+import React, { useEffect, useRef } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { FaUsers, FaThumbsUp, FaBuilding } from 'react-icons/fa';
 import Image from "next/image";
 import HeroImage from "../public/images/austin-distel-wD1LRb9OeEo-unsplash.jpg";
-import React, { useEffect, useRef } from "react";
 
-// Define the stats
+
+
+// Define the stats with icons
 const stats = [
-  { label: "Number of successful Candidate", value: 231 },
-  { label: "verified testimonials", value: 103 },
-  { label: "Clients worked with", value: 84 },
+  { label: "Number Of Successful Candidates", value: 231, icon: <FaUsers className="text-blue-600 text-3xl" /> },
+  { label: "Verified Testimonials", value: 103, icon: <FaThumbsUp className="text-blue-600 text-3xl" /> },
+  { label: "Clients Worked With", value: 84, icon: <FaBuilding className="text-blue-600 text-3xl" /> },
 ];
 
 // Custom hook for counting up
@@ -31,10 +36,20 @@ const useCountUp = (endValue) => {
 // StatsSection Component
 const StatsSection = () => {
   return (
-    <div className="bg-gradient-to-r from-indigo-200 to-indigo-100 py-8 border-t border-b-black">
-      <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between items-center px-4 md:px-8">
+    <div className="relative">
+      <motion.div
+        className="absolute inset-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.2 }}
+        transition={{ duration: 2 }}
+        style={{ background: ''}}
+      />
+      <div className="relative max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between items-center px-4 md:px-8">
         {stats.map((stat, index) => (
           <div key={index} className="text-center mb-8 md:mb-0">
+            <div className="flex items-center justify-center mb-2">
+              {stat.icon}
+            </div>
             <div className="flex items-baseline justify-center">
               <span className="text-xl md:text-2xl font-bold text-black dark:text-white mr-2" ref={useCountUp(stat.value)}>
                 0
@@ -94,7 +109,7 @@ const Hero = () => {
             </a>
           </div>
         </div>
-        <div className="flex-none mt-14 md:mt-0 md:max-w-xl xl:max-w-2xl">
+        <div className="flex-none mt-14 md:mt-0 md:max-w-xl xl:max-w-xl">
           <Image src={HeroImage} className="md:rounded-tl-[108px]" alt="Hero" />
         </div>
       </div>

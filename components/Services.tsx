@@ -1,78 +1,71 @@
-import { cn } from "@/utils/cn";
-import React from "react";
-import { BentoGrid, BentoGridItem } from "../components/ui/BentoGrid";
-import {
-  IconClipboardCopy,
-  IconFileBroken,
-  IconSignature,
-  IconTableColumn,
-} from "@tabler/icons-react";
-const Skeleton = () => (
-  <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl   dark:bg-dot-white/[0.2] bg-dot-black/[0.2] [mask-image:radial-gradient(ellipse_at_center,white,transparent)]  border border-transparent dark:border-white/[0.2] bg-neutral-100 dark:bg-black"></div>
-);
-const items = [
-  {
-    title: "01. Consultation",
-    description: "Zyntel's CV enhancement service crafts tailored resumes that highlight your skills and achievements, maximizing your job prospects.",
-    header: <Skeleton />,
-    className: "md:col-span-2",
-    icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
-  },
-  {
-    title: "02. Job Search",
-    description: "Zyntel's job search service connects you with opportunities that match your career goals.",
-    header: <Skeleton />,
-    className: "md:col-span-1",
-    icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
-  },
- 
-  {
-    title: "03. Consultation",
-    description:
-      "At Zyntel, our consultation service provides expert guidance in recruitment and career advancement, offering tailored industry insights.",
-    header: <Skeleton />,
-    className: "md:col-span-2",
-    icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
-  },
+"use client";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { services } from '../data';
 
-  {
-    title: "The Art of Design",
-    description: "Discover the beauty of thoughtful and functional design.",
-    header: <Skeleton />,
-    className: "md:col-span-1",
-    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+const cardVariants = {
+  hidden: { opacity: 0, x: -100 },
+  visible: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: {
+      delay: i * 0.3, // Stagger the animation
+      duration: 0.5,
+    },
+  }),
+};
+
+const buttonVariants = {
+  hover: {
+    scale: 1.1,
+    transition: {
+      yoyo: Infinity, // Repeats the animation indefinitely
+    },
   },
-];
+};
 
-
-
-const Services = () => {
+const ServicesSection = () => {
   return (
-    <div>
-     <div className="max-w-screen-xl mx-auto text-center">
+    <section className="py-20 px-4 bg-white dark:bg-gray-900">
+      <div className="max-w-screen-xl mx-auto text-center mb-12">
         <h2 className="text-indigo-600 dark:text-indigo-400 text-[22px] font-semibold mb-2">
           — Our Services
         </h2>
-        <h1 className="text-gray-700 dark:text-gray-100 text-3xl md:text-4xl font-bold mb-8">
-          Tailored Recruitment and Consultancy Services
+        <h1 className="text-gray-700 dark:text-gray-100 text-3xl md:text-4xl font-bold">
+          Tailored Recruitment <br />and Consultancy Services
         </h1>
       </div>
-      <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">
-      {items.map((item, i) => (
-        <BentoGridItem
-          key={i}
-          title={item.title}
-          description={item.description}
-          header={item.header}
-          className={item.className}
-          icon={item.icon}
-        />
-      ))}
-    </BentoGrid>
-    </div>
-    
-  )
-}
+      <div className="max-w-screen-xl mx-auto grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {services.map((service, index) => (
+          <motion.div
+            key={index}
+            className="flex flex-col items-center text-center border border-gray-200 dark:border-gray-700 rounded-lg p-6 transition-transform transform hover:scale-105 hover:shadow-lg"
+            custom={index}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={cardVariants}
+          >
+            <div className="flex items-center justify-center mb-4">
+              <service.icon className="text-indigo-600 dark:text-indigo-400 text-6xl mb-4" />
+            </div>
+            <h3 className="text-lg font-bold mb-4">{service.title}</h3>
+            <p className="text-gray-700 dark:text-gray-300 mb-4">{service.description}</p>
+          </motion.div>
+        ))}
+      </div>
+      <div className="flex justify-center mt-12">
+        <motion.a
+          href="tel:+353876276005" // Replace with your phone number
+          className="bg-indigo-600 text-white py-3 px-8 rounded-lg shadow-lg font-semibold hover:bg-indigo-700"
+          variants={buttonVariants}
+          whileHover="hover"
+        >
+          Book Free Consultation Now
+        </motion.a>
+      </div>
+    </section>
+  );
+};
 
-export default Services
-
+export default ServicesSection;
