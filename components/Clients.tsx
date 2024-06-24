@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { CardStack } from "../components//ui/CardStack";
+import { CardStack } from "../components/ui/CardStack";
 import { cn } from "@/utils/cn";
 
 // Small utility to highlight the content of specific section of a testimonial content
@@ -54,9 +54,8 @@ export const CARDS = [
     designation: "Manager Project Mayhem",
     content: (
       <p>
-        The first rule of
-        <Highlight>Fight Club</Highlight> is that you do not talk about fight
-        club. The second rule of
+        The first rule of <Highlight>Fight Club</Highlight> is that you do not
+        talk about fight club. The second rule of{" "}
         <Highlight>Fight club</Highlight> is that you DO NOT TALK about fight
         club.
       </p>
@@ -66,23 +65,23 @@ export const CARDS = [
 
 const Clients = () => {
   return (
-    <div className="flex justify-center py-20">
-      <div className="text-left mr-16">
+    <div className="flex flex-col lg:flex-row justify-center py-20 px-4 lg:px-8">
+      <div className="text-left lg:mr-16 mb-8 lg:mb-0 w-full lg:w-auto">
         <h2 className="text-indigo-600 text-[22px] font-semibold mb-2">
           - Our Testimonials
         </h2>
         <h1 className="text-gray-700 text-3xl md:text-4xl font-bold mb-4">
-          Reviews Of People Who Have <br />
+          Reviews Of People Who Have <br className="hidden lg:inline" />
           Found Through Dreaming.
         </h1>
         <p className="text-gray-500 text-base md:text-lg mb-8 max-w-2xl">
-            Creating products with a strong identity. We provide brilliant ideas
-            and adding the world called success brand. We deliver customized
-            marketing campaign to use your audience to make a positive move.
-          </p>
+          Creating products with a strong identity. We provide brilliant ideas
+          and adding the world called success brand. We deliver customized
+          marketing campaign to use your audience to make a positive move.
+        </p>
       </div>
 
-      <div className="ml-4">
+      <div className="w-full lg:w-auto">
         <CardStack items={CARDS} />
       </div>
     </div>
