@@ -26,42 +26,56 @@ export const Highlight = ({
 export const CARDS = [
   {
     id: 0,
-    name: "Manu Arora",
-    designation: "Senior Software Engineer",
+    name: "Aoife Mallory",
+    designation: "Business Development Representative",
     content: (
       <p>
-        These cards are amazing, <Highlight>I want to use them</Highlight> in my
-        project. Framer motion is a godsend ngl tbh fam 🙏
+        I had a mixed experience with Zyntel. As a project manager exploring new
+        opportunities, I engaged with their services hoping for a seamless
+        transition to a new role. Communication was adequate but occasionally
+        lacked clarity.
       </p>
     ),
   },
   {
     id: 1,
-    name: "Elon Musk",
-    designation: "Senior Shitposter",
+    name: "Jamie Murphy",
+    designation: "Talent Acquisition Specialist",
     content: (
       <p>
-        I dont like this Twitter thing,{" "}
-        <Highlight>deleting it right away</Highlight> because yolo. Instead, I
-        would like to call it <Highlight>X.com</Highlight> so that it can easily
-        be confused with adult sites.
+        The team at Zyntel demonstrated a solid understanding of the talent
+        acquisition field.Throughout the recruitment process, their
+        communication was consistent and clear. They provided useful insights,
+        thorough interview preparation.
       </p>
     ),
   },
   {
     id: 2,
-    name: "Tyler Durden",
-    designation: "Manager Project Mayhem",
+    name: "Sarah Murphy",
+    designation: "HR Assistant",
     content: (
       <p>
-        The first rule of <Highlight>Fight Club</Highlight> is that you do not
-        talk about fight club. The second rule of{" "}
-        <Highlight>Fight club</Highlight> is that you DO NOT TALK about fight
-        club.
+        The team at Zyntel took the time to understand my background, skills,
+        and career aspirations.Throughout the process, their communication was
+        consistent and supportive. They kept me informed at every stage,
+        ensuring I felt valued and well-prepared.
+      </p>
+    ),
+  },
+
+  {
+    id: 3,
+    name: "Jack O'Neil",
+    designation: "Intel Software Developer",
+    content: (
+      <p>
+        I am incredibly grateful to Zyntel for their exceptional service in helping me secure an internship as a software engineer. As a recent graduate, I was eager to find an opportunity that would allow me to apply my skills and grow professionally
       </p>
     ),
   },
 ];
+
 
 const Clients = () => {
   return (

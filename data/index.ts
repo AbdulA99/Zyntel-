@@ -33,7 +33,7 @@ export const services = [
 export const socialMedia = [
   {
     id: 1,
-    img: "/git.svg",
+    img: "/facebook.svg",
   },
   {
     id: 2,
@@ -41,6 +41,6 @@ export const socialMedia = [
   },
   {
     id: 3,
-    img: "/link.svg",
+    img: "/instagram.svg",
   },
 ];

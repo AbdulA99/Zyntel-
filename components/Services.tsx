@@ -26,7 +26,7 @@ const buttonVariants = {
 
 const ServicesSection = () => {
   return (
-    <section className="py-20 px-4 bg-white dark:bg-gray-900">
+    <section className="py-20 px-4 bg-white dark:bg-gray-900" id='services'>
       <div className="max-w-screen-xl mx-auto text-center mb-12">
         <h2 className="text-indigo-600 dark:text-indigo-400 text-[22px] font-semibold mb-2">
           — Our Services

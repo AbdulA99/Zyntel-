@@ -5,6 +5,7 @@ import About from "../components/About";
 import Services from "../components/Services";
 import Clients from "../components/Clients";
 import Footer from  "../components/Footer";
+import Contact from "../components/Contact";
 
 export default function Home() {
   return (
